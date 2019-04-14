@@ -21,4 +21,9 @@ class HomeController extends AbstractController
             'documents' => $documents,
         ]);
     }
+
+    public function login():Response
+    {
+        
+    }
 }

@@ -47,6 +47,10 @@ class ContributorController extends AbstractController
              * Update each decision with new  Form data
              */
             foreach ($decisions as $decision){
+                /**
+                 * Access Roles Validation
+                 */
+                $this->denyAccessUnlessGranted('update',$contributor);
                 switch ($decision->getDeposit()){
                     case 'oui' : $decision->setIsTaken(true);$decision->setContent('Dépôt');break;
                     case 'non' : $decision->setIsTaken(true);$decision->setContent('Refus Dépôt');break;

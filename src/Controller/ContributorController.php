@@ -49,11 +49,32 @@ class ContributorController extends AbstractController
              * Update each decision with new  Form data
              */
 
+            $data=$request->request->get('contributor');
+
+            $i = 0;
             foreach ($contributor->getDecisionsNT() as $decision) {
                 /**
                  * Access Roles Validation : If $contributor is the owner of $decision , He is allow to update it
                  */
                 $this->isGranted('update', $contributor);
+
+
+                switch ($data['decisionsNT'][$i]['deposit']) {
+                    case 'oui' :
+                        $decision->setIsTaken(true);
+                        $decision->setContent('Dépôt');
+                        break;
+                    case 'non' :
+                        $decision->setIsTaken(true);
+                        $decision->setContent('Refus Dépôt');
+                        break;
+                    default    : //$decision->setIsTaken(null);
+                        $decision->setContent('En attente');
+                        break;
+                }
+
+                $i++;
+                                                                             /*
 
                 switch ($decision->getDeposit()) {
                     case 'oui' :
@@ -68,7 +89,7 @@ class ContributorController extends AbstractController
                         $decision->setContent('En attente');
                         break;
                 }
-
+                                                                            */
 
 
             }

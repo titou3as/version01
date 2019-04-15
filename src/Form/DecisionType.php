@@ -14,6 +14,7 @@ class DecisionType extends AbstractType
     {
         $builder
             ->add('deposit',ChoiceType::class,[
+                'mapped' => false,
                 'label'=> false,
                 'expanded'=> true,
                 'choices'=>[

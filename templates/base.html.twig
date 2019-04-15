@@ -129,10 +129,10 @@
             {% else %}
                 <form action="{{ path('home_logout') }}" class="form-inline pull-right">
                     <div class="btn-group">
-                        <button class="btn btn-small btn-primary" type="button"
-                                onclick="$('#form-login').submit();" accesskey="l">
+                        <a class="btn btn-small btn-primary"
+                                href="{{ path('home_connexion') }}">
                             <i class="glyphicon glyphicon-user glyphicon-white"></i>&nbsp;Deconnexion
-                        </button>
+                        </a>
                     </div>
                 </form>
             {% endif %}

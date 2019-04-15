@@ -18,16 +18,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-    /**
-     * @Route("/", name="home_page")
-     */
-    public function index(DocumentRepository $repository) :Response
-    {
-        $documents  = $repository->findAll();
-        return $this->render('security/index.html.twig', [
-            'documents' => $documents,
-        ]);
-    }
+
     /**
      * @Route("/inscription", name = "home_inscription")
      */
@@ -49,7 +40,7 @@ class SecurityController extends AbstractController
         ]);
     }
     /**
-     * @Route("/connexion", name="home_connexion")
+     * @Route("/", name="home_connexion")
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {

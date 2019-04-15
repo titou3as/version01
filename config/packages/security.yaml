@@ -20,7 +20,7 @@ security:
             form_login:
                 login_path: home_connexion
                 check_path: home_connexion
-        
+                default_target_path: contributor_index
             logout:
                 path: home_logout
                 target: home_connexion

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Contributor;
 use App\Entity\Decision;
 use App\Form\ContributorType;
 use App\Repository\ContributorRepository;
@@ -11,17 +12,26 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+
 /**
  * @Route("/contributor")
  */
 class ContributorController extends AbstractController
 {
     /**
-     * @Route("/index/{id}", name="contributor_index",methods={"GET"})
+     * @Route("/index", name="contributor_index",methods={"GET","POST"})
      */
-    public function index(ContributorRepository $repository, $id, ObjectManager $manager,DecisionRepository $decisionRepository, Request $request): Response
+    public function index(ContributorRepository $repository, ObjectManager $manager,DecisionRepository $decisionRepository, Request $request): Response
     {
-        $contributor = $repository->find($id);
+        /**
+         * @var Contributor $contributor
+         */
+        $contributor = $this->getUser();
+                        // $id = $contributor->getId();
+       //dump($contributor);die;
+        //dump($contributor);die;
+                       // $contributor = $repository->find(id);
         /**
          * @var Decision[] $decisions
          */

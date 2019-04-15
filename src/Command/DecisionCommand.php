@@ -2,6 +2,9 @@
 
 namespace App\Command;
 
+use App\Entity\Contributor;
+use App\Entity\Decision;
+use App\Entity\Document;
 use App\Repository\DocumentRepository;
 use App\Repository\ContributorRepository;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -49,11 +52,11 @@ class DecisionCommand extends Command
         $admin = $input->getArgument('admin');
         $docID = $input->getOption('document');
         $conID = $input->getOption('contributor');
-        if ($admin) {
+         //if ($admin) {
             //Operations created by the administrator
-            $io->note(sprintf('You passed an argument: %s', $admin));
-        }
-        else{
+         //   $io->note(sprintf('You passed an argument: %s', $admin));
+         //}
+         //else{
 
             /**
              * Getting the Document's informations having id = $docID
@@ -76,16 +79,17 @@ class DecisionCommand extends Command
              */
             $decision = new Decision();
             $decision->setContent('En cours de construction')
-                ->addDocument($document)
-                ->addContributor($contributor)
-                ->setAllowedAt(new \DateTime())
-                ->setIsTaken(false);
+                ->setDocument($document)
+                ->setContributor($contributor)
+                ->setCreatedAt(new \DateTime())
+                ->setIsTaken(false)
+            ->setDeposit('null');
             /**
              * Persist the Decision and Flush into the Database
              */
             $this->manager->persist($decision);
             $this->manager->flush();
-        }
+         //}
 
         $io->success('Félicitations : Les décisions sont crées et en cours d\'attente des contributeurs .');
     }

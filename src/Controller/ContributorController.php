@@ -52,6 +52,7 @@ class ContributorController extends AbstractController
             $data=$request->request->get('contributor');
 
             $i = 0;
+            //dump($data['decisionsNT']);die;
             foreach ($contributor->getDecisionsNT() as $decision) {
                 /**
                  * Access Roles Validation : If $contributor is the owner of $decision , He is allow to update it

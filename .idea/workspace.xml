@@ -43,7 +43,7 @@
         <entry file="file://$PROJECT_DIR$/src/Controller/ContributorController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="271">
-              <caret line="60" column="16" selection-start-line="60" selection-start-column="16" selection-end-line="60" selection-end-column="16" />
+              <caret line="54" column="14" selection-start-line="54" selection-start-column="14" selection-end-line="54" selection-end-column="14" />
               <folding>
                 <element signature="e#34#61#0#PHP" expanded="true" />
               </folding>
@@ -115,6 +115,11 @@
     <servers>
       <server host="localhost" id="e8732e5b-d9f7-407e-98d6-695282431e76" name="localhost" port="8000" />
       <server host="127.0.0.1" id="5f638167-73e5-4cb5-8eb7-7376f1dbedf5" name="127.0.0.1" port="8000" />
+      <server host="localhost" id="605cc472-54f5-4e3e-89b8-ab0c648acbab" name="localhost (1)" use_path_mappings="true">
+        <path_mappings>
+          <mapping local-root="$PROJECT_DIR$/public" remote-root="/usr/share/phpmyadmin" />
+        </path_mappings>
+      </server>
     </servers>
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
@@ -334,12 +339,12 @@
       <workItem from="1555270449404" duration="2009000" />
       <workItem from="1555311197855" duration="65000" />
       <workItem from="1555311280651" duration="11078000" />
-      <workItem from="1555327615530" duration="8458000" />
+      <workItem from="1555327615530" duration="8928000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27453000" />
+    <option name="totallyTimeSpent" value="27923000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="2493" height="1415" extended-state="6" />
@@ -527,7 +532,7 @@
     <entry file="file://$PROJECT_DIR$/src/Controller/ContributorController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="271">
-          <caret line="60" column="16" selection-start-line="60" selection-start-column="16" selection-end-line="60" selection-end-column="16" />
+          <caret line="54" column="14" selection-start-line="54" selection-start-column="14" selection-end-line="54" selection-end-column="14" />
           <folding>
             <element signature="e#34#61#0#PHP" expanded="true" />
           </folding>

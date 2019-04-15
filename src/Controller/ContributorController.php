@@ -28,6 +28,7 @@ class ContributorController extends AbstractController
          * @var Contributor $contributor
          */
         $contributor = $this->getUser();
+
                         // $id = $contributor->getId();
        //dump($contributor);die;
         //dump($contributor);die;

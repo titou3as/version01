@@ -10,13 +10,13 @@
                         <th>Contenu de la décision</th>
                         <th>Décision à prendre</th>
                         <tbody>
-                        {{ is }}
+
                             {% for decision in form.decisionsNT %}
                                 <tr>
                                     <td>{{ decision.vars.value.document.doi }}</td>
                                     <td>{{ decision.vars.value.content }}</td>
                                     <td>
-                                        {{ form_widget(decision ,{'id' : 'num'})  }}
+                                        {{ form_widget(decision,{'attr':{'data-id':'dec-'~form.vars.value.id~'-'~decision.vars.value.document.id~'-'~decision.vars.value.contributor.id}}) }}
                                     </td>
                                  </tr>
                             {% endfor %}

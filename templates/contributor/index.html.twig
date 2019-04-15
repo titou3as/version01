@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+       <h1 class="text-right text-primary">{{ contributor.username }} </h1>
+        <h3 class="text-center text-danger">Liste des décisions non prises pour dépôt</h3>
+            {% if(decisions | length > 0)  %}
+                {{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
+                    <table class="table">
+                        <th>DOI Document concerné</th>
+                        <th>Contenu de la décision</th>
+                        <th>Décision à prendre</th>
+                        <tbody>
+                        {{ is }}
+                            {% for decision in form.decisionsNT %}
+                                <tr>
+                                    <td>{{ decision.vars.value.document.doi }}</td>
+                                    <td>{{ decision.vars.value.content }}</td>
+                                    <td>
+                                        {{ form_widget(decision ,{'id' : 'num'})  }}
+                                    </td>
+                                 </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+
+                <button class="btn btn-success">Décider</button>
+                {{ form_end(form) }}
+            {% else %}
+                <blockquote>Vous n'avez aucune décisions à prendre pour dépôt</blockquote>
+            {% endif %}
+    </div>
+{% endblock %}

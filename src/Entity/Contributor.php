@@ -63,6 +63,11 @@ class Contributor implements UserInterface
      */
     private $email;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isAdmin;
+
     public function __construct()
     {
         $this->decisions = new ArrayCollection();
@@ -239,4 +244,16 @@ class Contributor implements UserInterface
     public function getRoles(){
         return ['ROLE_USER'];
      }
+
+    public function getIsAdmin(): ?bool
+    {
+        return $this->isAdmin;
+    }
+
+    public function setIsAdmin(bool $isAdmin): self
+    {
+        $this->isAdmin = $isAdmin;
+
+        return $this;
+    }
 }

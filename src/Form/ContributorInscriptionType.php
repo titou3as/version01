@@ -48,7 +48,7 @@ class ContributorInscriptionType extends AbstractType
                                         'required' => true,
                 ])
             ->add('email',EmailType::class,[
-                                            'label' => 'Nom : ',
+                                            'label' => 'Adresse Email : ',
                                             'attr' => [
                                                     'placeholder' => 'Tapez votre Email ...',
                                                     'class'=>'form-control'

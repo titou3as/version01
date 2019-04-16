@@ -1,33 +1,54 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <div class="container">
-       <h1 class="text-right text-primary">{{ contributor.username }} </h1>
-        <h3 class="text-center text-danger">Liste des décisions non prises pour dépôt</h3>
-            {% if(decisions | length > 0)  %}
-                {{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
-                    <table class="table">
-                        <th>DOI Document concerné</th>
-                        <th>Contenu de la décision</th>
-                        <th>Décision à prendre</th>
-                        <tbody>
+    <div class="container well span6">
+        <div class="row-fluid">
+            <div class="span2">
+                <h1 class="text-right text-info">{{ contributor.firstname }} {{ contributor.lastname }}</h1>
+            </div>
+            <div class="span8">
+                <h6>Login: {{ contributor.username }}</h6>
+                <h6>Email: {{ contributor.email }}</h6>
+            </div>
+            <div class="span2">
+                <div class="btn-group">
+                    <a class="btn dropdown-toggle btn-info" data-toggle="dropdown" href="#">
+                        Action
+                        <span class="icon-cog icon-white"></span><span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><span class="icon-wrench"></span> Editer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="span8">
+                    <h3 class="text-center text-danger">Vos documents non encore publiés sur HAL</h3>
+                             {% if(decisions | length > 0)  %}
+                                {{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
+                            <table class="table">
+                                <th>DOI</th>
+                                <th>Etat de dépôt</th>
+                                <th>Décision à prendre</th>
+                                <tbody>
 
-                            {% for decision in form.decisionsNT %}
-                                <tr>
-                                    <td>{{ decision.vars.value.document.doi }}</td>
-                                    <td>{{ decision.vars.value.content }}</td>
-                                    <td>
-                                        {{ form_widget(decision,{'attr':{'data-id':'dec-'~form.vars.value.id~'-'~decision.vars.value.document.id~'-'~decision.vars.value.contributor.id}}) }}
-                                    </td>
-                                 </tr>
-                            {% endfor %}
+                                    {% for decision in form.decisionsNT %}
+                                        <tr>
+                                            <td>{{ decision.vars.value.document.doi }}</td>
+                                            <td>{{ decision.vars.value.content }}</td>
+                                            <td>
+                                                    {{ form_widget(decision,{'attr':{'data-id':'dec-'~form.vars.value.id~'-'~decision.vars.value.document.id~'-'~decision.vars.value.contributor.id}}) }}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
 
-                        </tbody>
-                    </table>
+                                </tbody>
+                            </table>
 
-                <button class="btn btn-success">Décider</button>
-                {{ form_end(form) }}
-            {% else %}
-                <blockquote>Vous n'avez aucune décisions à prendre pour dépôt</blockquote>
-            {% endif %}
+                    <button class="btn btn-info pull-right">Confirmer</button>
+                                {{ form_end(form) }}
+                        {% else %}
+                    <blockquote>Vous n'avez aucune décisions à prendre pour dépôt</blockquote>
+                         {% endif %}
+            </div>
+        </div>
     </div>
 {% endblock %}

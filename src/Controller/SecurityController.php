@@ -34,6 +34,8 @@ class SecurityController extends AbstractController
             $contributor->setPassword($hash);
             $manager->persist($contributor);
             $manager->flush();
+            $this->redirectToRoute('home_connexion');
+            $this->addFlash('success','Compte crée avec succès');
         }
         return $this->render('security/inscription.html.twig',[
                     'form' => $form->createView()

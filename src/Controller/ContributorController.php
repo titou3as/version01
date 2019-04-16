@@ -52,14 +52,14 @@ class ContributorController extends AbstractController
             $data=$request->request->get('contributor');
             $i = 0;
                 //dump($data['decisionsNT']);die;
-            foreach ($contributor->getDecisionsNT() as $decision) {
+            foreach ($contributor->getDecisionsNT() as $key=>$decision) {
                 /**
                  * Access Roles Validation : If $contributor is the owner of $decision , He is allow to update it
                  */
                 $this->isGranted('update', $contributor);
 
 
-                switch ($data['decisionsNT'][$i]['deposit']) {
+                switch ($data['decisionsNT'][$key]['deposit']) {
                     case 'oui' :
                         $decision->setIsTaken(true);
                         $decision->setContent('Dépôt');

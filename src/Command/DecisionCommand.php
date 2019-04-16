@@ -21,6 +21,13 @@ class DecisionCommand extends Command
     private $documentRepository;
     private $contributorRepository;
     private $manager;
+
+    /**
+     * DecisionCommand constructor.
+     * @param ContributorRepository $contributorRepository
+     * @param DocumentRepository $documentRepository
+     * @param ObjectManager $manager
+     */
     public function __construct(ContributorRepository $contributorRepository, DocumentRepository $documentRepository, ObjectManager $manager)
     {
         parent::__construct();
@@ -42,8 +49,7 @@ class DecisionCommand extends Command
         ->addOption('contributor',
             'c',
             InputOption::VALUE_REQUIRED,
-            'The identifiant of the contributor concerned about the deposit')
-    ;
+            'The identifiant of the contributor concerned about the deposit');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

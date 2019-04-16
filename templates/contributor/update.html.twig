@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class = "container">
+        <h1> Changement des paramètres du mon compte</h1>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <div class ="pull-right">
+            <button type ="submit" class ="btn btn-primary"> Confirmer</button>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

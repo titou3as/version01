@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Contributor;
 use App\Entity\Decision;
+use App\Form\ContributorInscriptionType;
 use App\Form\ContributorType;
 use App\Repository\ContributorRepository;
 use App\Repository\DecisionRepository;
@@ -50,7 +51,6 @@ class ContributorController extends AbstractController
              */
 
             $data=$request->request->get('contributor');
-            $i = 0;
                 //dump($data['decisionsNT']);die;
             foreach ($contributor->getDecisionsNT() as $key=>$decision) {
                 /**
@@ -69,12 +69,10 @@ class ContributorController extends AbstractController
                         $decision->setContent('Refus Dépôt');
                         break;
                     default    : //$decision->setIsTaken(null);
-                        $decision->setContent('En attente');
+                        $decision->setContent('En attente d\'une prochaine décision');
                         break;
                 }
-
-                $i++;
-                                                                             /*
+                 /*
 
                 switch ($decision->getDeposit()) {
                     case 'oui' :
@@ -90,13 +88,10 @@ class ContributorController extends AbstractController
                         break;
                 }
                                                                             */
-
-
             }
                 /**
                  * Saving the contributor's new state decisions
                  */
-
                 $manager->flush();
                 $this->addFlash('success','Les nouvelles décisions sont prises en compte');
                 return $this->redirectToRoute('contributor_index');
@@ -106,6 +101,34 @@ class ContributorController extends AbstractController
         return $this->render('contributor/index.html.twig', [
             'contributor' => $contributor,
             'decisions' => $decisions,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/update", name="contributor_update")
+     * @param ContributorRepository $repository
+     * @param ObjectManager $manager
+     * @param Request $request
+     */
+    public function update(ContributorRepository $repository,ObjectManager $manager,Request $request): Response{
+        /**
+         * @var Contributor $contributor
+         */
+        $contributor = $this->getUser();
+        $form = $this->createForm(ContributorInscriptionType::class,$contributor);
+        $form->handleRequest($request);
+        if($form->isSubmitted()){
+            /**
+             * @var Contributor $contributor
+             */
+           $contributor = $form->getData();
+            $manager->persist($contributor);
+            $manager->flush();
+            $this->addFlash('success','Les changements de votre données personnelles sont prises en compte');
+            $this->redirectToRoute('contributor_index');
+        }
+        return $this->render('contributor/update.html.twig',[
             'form' => $form->createView(),
         ]);
     }

@@ -54,6 +54,14 @@
                 </div>
             <div class="panel-body" id="login">
                 <form  method="POST">
+                    <fieldset>
+						<div class="row">
+							<div class="col-sm-12 col-md-11  col-md-offset-1 text-center mb-2">
+								<img class="img-rounded profile-img"
+                                     src="https://cas.ccsd.cnrs.fr/cas/images/logo-hal.png;jsessionid=1622E1AFA2498AE67C9BEBE47EABBCD7"
+                                     alt="">
+							</div>
+						</div>
                     {% if error %}
                         <div class="alert alert-danger">
                             {{ error.message }}
@@ -61,14 +69,18 @@
                         </div>
                     {% endif %}
                     <div class ="form-group">
+
                          <input  placeholder="Adresse email ....." required name="_username" type="text" value="{{ lastusername }}" class = "form-control">
                     </div>
                     <div class ="form-group">
                         <input placeholder="Mot de passe ..." required name="_password" type="password" class = "form-control">
                     </div>
                     <div class ="form-group">
-                        <button type="submit" class="btn btn-success">S'authentifier</button> 
+                        <div style="text-align:center;padding:1em 1em 0 1em;">
+                            <button type="submit" class="btn btn-primary">Se Connecter</button>
+                        </div>
                     </div>
+                    </fieldset>
                 </form>
             </div>
         </div>
@@ -79,9 +91,11 @@
                         <strong>Vous n'avez pas de compte</strong>
                     </div>
                     <div class="panel-body" id="no-account" style="padding-top:120px;padding-bottom:120px;">
-                        <a class="btn btn-primary btn-lg btn-block" id="create-account" href="{{path('home_inscription') }}">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Créer un compte
-                        </a>
+                        <div style="text-align:center;padding:1em 1em 0 1em;">
+                            <a class="btn btn-primary btn-lg btn-block" id="create-account" href="{{path('home_inscription') }}">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Créer un compte
+                            </a>
+                        </div>
                     </div>
                     <div class="panel-footer" style="text-align:center;">
                         <a href="https://hal.archives-ouvertes.fr/page/creer-son-compte-et-son-profil-dans-hal">Aide</a>

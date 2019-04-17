@@ -50,42 +50,40 @@ class ContributorDecisionCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $conID = $input->getOption('contributor');
         /**
+         * Search the Contributor's id = $conID
          * @var Contributor $contributor
          */
         $contributor = $this->contributorRepository->find($conID);
         /**
          * Extracting all document's contributor without decisions
          */
-        $documents = $contributor->getDocuments()->filter(/**
-                                            * @param Decision $decision
-                                            */ function($decision){
-                                                                return $decision->getId()===null;
-                                             });
+        $documents = $contributor->getDocuments();
         /**
          * Per each Document , creating a new decision
          * @var Document[] $documents
          * @var Document $document
          */
-
         foreach ($documents as $document) {
-            /**
-             * Adding the new Decision (isTaken = false)
-             */
-            $decision = new Decision();
-            $decision->setContent('En cours de construction')
-                    ->setDocument($document)
-                    ->setContributor($contributor)
-                    ->setCreatedAt(new \DateTime())
-                    ->setIsTaken(false)
-                    ->setDeposit('null');
-            /**
-             * Persist the Decision and Flush into the Database
-             */
-            $this->manager->persist($decision);
-        }
+                 if($document->getDecisions()->count()==0) {
+                        // $output->writeln($document->getTitle());
+     /**
+      * Adding the new Decision (isTaken = false)
+      */
+                     $decision = new Decision();
+                     $decision->setContent('En cours de construction')
+                                ->setDocument($document)
+                                ->setContributor($contributor)
+                                ->setCreatedAt(new \DateTime())
+                                ->setIsTaken(false)
+                                ->setDeposit('null');
+     /**
+      * Persist the Decision and Flush into the Database
+      */
+                    $this->manager->persist($decision);
+ }
+                }
         $this->manager->flush();
         //}
-
-        $io->success('Félicitations : Les décisions relatives au contributeur'.$contributor->setUsername().'sont crées .');
+        $io->success('Félicitations : Les décisions relatives au contributeur '.$contributor->getUsername().' sont crées .');
     }
 }

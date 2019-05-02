@@ -38,6 +38,7 @@ class ContributorController extends AbstractController
         /**
          * @var Decision[] $decisions
          */
+             // $decisions = $decisionRepository->getAllDecisionsNotTaken($contributor->getId());
         $decisions = $contributor->getDecisions()->filter(function ($decision){
             /** @var Decision $decision */
             return $decision->getIsTaken() == false;

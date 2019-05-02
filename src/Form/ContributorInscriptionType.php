@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Contributor;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -54,6 +55,13 @@ class ContributorInscriptionType extends AbstractType
                                                     'class'=>'form-control'
                                                 ],
                                             'required' => true,
+            ])
+            ->add('isAdmin',CheckboxType::class,[
+                'label' => 'Admin : ',
+                'attr' => [
+                    'class'=>'form-control'
+                ],
+                'required' => true,
             ])
         ;
     }

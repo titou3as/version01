@@ -28,7 +28,9 @@ class DecisionCommand extends Command
      * @param DocumentRepository $documentRepository
      * @param ObjectManager $manager
      */
-    public function __construct(ContributorRepository $contributorRepository, DocumentRepository $documentRepository, ObjectManager $manager)
+    public function __construct(ContributorRepository $contributorRepository,
+                                DocumentRepository $documentRepository,
+                                ObjectManager $manager)
     {
         parent::__construct();
         $this->manager = $manager;

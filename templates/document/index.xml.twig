@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://api.archives-ouvertes.fr/documents/aofr-sword.xsd">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>HAL TEI export of tel-{{ document.id }}</title>
+            </titleStmt>
+            <publicationStmt>
+                <distributor>CCSD</distributor>
+                <availability status="restricted">
+                    <licence target="http://creativecommons.org/licenses/by/4.0/">
+                        Distributed under a Creative Commons Attribution 4.0 International License
+                    </licence>
+                </availability>
+                <date when="{{ "now" |date}}"/>
+            </publicationStmt>
+            <sourceDesc>
+                <p part="N">HAL API platform</p>
+            </sourceDesc>
+        </fileDesc>
+    </teiHeader>
+    <text>
+        <body>
+        <listBibl>
+            <biblFull>
+                <sourceDesc>
+                    <biblStruct>
+                        <analytic><title xml:lang="fr">{{ document.title }}</title>
+                            <author role="aut">
+                               <persName>
+                                   <forename type="first">
+                                       -- Prénom auteur document lié décision --
+                                   </forename>
+                                   <surname>
+                                       -- Nom auteur document lié décision --
+                                   </surname>
+                               </persName>
+                                <idno type="halauthorid">
+                                    --identifiant auteur dans hal --
+                                </idno>
+                                <affiliation ref="reference.affiliation"/>
+                                <email type="domain">
+                                    -- email auteur du document--
+                                </email>
+                            </author>
+                        </analytic>
+                    </biblStruct>
+                </sourceDesc>
+                <profileDesc>
+                    <langUsage>
+                        <language ident="fr">French</language>
+                    </langUsage>
+                    <textClass>
+                        <classCode scheme="halDomain" n="domain.class-domain">
+                            --- Domaine du document --
+                        </classCode>
+                        <classCode scheme="halTypology" n="type.document">
+                            --type document --
+                        </classCode>
+                    </textClass>
+                    <abstract xml:lang="fr">{{ document.summary }}</abstract>
+                </profileDesc>
+            </biblFull>
+        </listBibl>
+        </body>
+        <back>
+            <listOrg type="">
+                <org type=""></org>
+            </listOrg>
+        </back>
+    </text>
+</TEI>

@@ -3,4 +3,9 @@
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="ES6" />
   </component>
+  <component name="ProjectResources">
+    <resource url="http://hal.archives-ouvertes.fr/" location="$PROJECT_DIR$" />
+    <resource url="http://www.tei-c.org/ns/1.0" location="$PROJECT_DIR$" />
+    <resource url="https://api.archives-ouvertes.fr/documents/aofr-sword.xsd" location="$USER_HOME$/finalApril/Xml/schemas/aofr-sword.xsd" />
+  </component>
 </project>

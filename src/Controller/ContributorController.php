@@ -98,7 +98,7 @@ class ContributorController extends AbstractController
             }
 
       // dump($decisions);die;
-        return $this->render('contributor/index.html.twig', [
+         return $this->render('contributor/index.html.twig', [
             'contributor' => $contributor,
             'decisions' => $decisions,
             'form' => $form->createView(),

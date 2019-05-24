@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h3 class="widget-header">Les derniers documents de HAL</h3>
+    <div class="widget-content">
+        <ul class="media-list"><!-- last-doc -->
+            {% for document in documents %}
+            <li class="media">
+                <a class="pull-left media-left" href="{{ path('document_index', {'id': document.id}) }}">
+                    <img src="//thumb.ccsd.cnrs.fr/8466430/thumb" width="40" class="img-thumbnail" alt="Vignette" />
+                </a>
+                <div class="media-body">
+                    <a href="{{ path('document_index', {'id': document.id}) }}">{{ document.citation|wordwrap(10,"\n",true)|nl2br }}</a>
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

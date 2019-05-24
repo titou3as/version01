@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 use App\Entity\Decision;
+use App\Entity\Document;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -30,7 +31,18 @@ class DecisionRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-    
+
+
+    /**
+     * Function return all Not Taken Decisions for the $id Contributor
+     * @return Decision[] Returns an array of Decision objects
+     */
+    public function getAllNotTaken(){
+        return $this->createQueryBuilder('d')
+            ->where("d.isTaken = false")
+            ->getQuery()
+            ->getResult();
+    }
     // /**
     //  * @return Decision[] Returns an array of Decision objects
     //  */

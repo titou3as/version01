@@ -10,7 +10,13 @@
                     <img src="//thumb.ccsd.cnrs.fr/8466430/thumb" width="40" class="img-thumbnail" alt="Vignette" />
                 </a>
                 <div class="media-body">
-                    <a href="{{ path('document_index', {'id': document.id}) }}">{{ document.citation|wordwrap(10,"\n",true)|nl2br }}</a>
+                    <a href="{{ path('document_index', {'id': document.id}) }}">
+                        {{ document.citation|wordwrap(10,"\n",true)|nl2br }}
+                    </a>
+                    {% if (app.user) %}
+                        <a class = "btn btn-success"href="update">Update</a>
+                    {% else %}
+                    {% endif %}
                 </div>
             </li>
         {% endfor %}

@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Polyfill\Intl\MessageFormatter\MessageFormatter;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DocumentRepository")
@@ -32,6 +33,10 @@ class Document
      * @ORM\Column(type="text")
      */
     private $summary;
+    /**
+     * @ORM\Column(type="string",length=255)
+     */
+    private $genre;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Decision", mappedBy="document")
@@ -42,6 +47,16 @@ class Document
      * @ORM\ManyToMany(targetEntity="App\Entity\Contributor", mappedBy="documents")
      */
     private $contributors;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $modifiedAt;
 
     public function __construct()
     {
@@ -88,6 +103,22 @@ class Document
         $this->summary = $summary;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGenre()
+    {
+        return $this->genre;
+    }
+
+    /**
+     * @param string $genre
+     */
+    public function setGenre($genre): void
+    {
+        $this->genre = $genre;
     }
 
     /**
@@ -145,6 +176,64 @@ class Document
             $this->contributors->removeElement($contributor);
             $contributor->removeDocument($this);
         }
+
+        return $this;
+    }
+    /**
+     * @param string $format
+     * @return string
+     */
+    public function citation($format= null)
+    {
+        /*
+        $dd= new \DateTime();
+
+        $dft = new IntlDateFormatter('en',
+            IntlDateFormatter::FULL,
+            0,
+            null,
+            null,
+            'dd/MM/yyyy h:m:s');
+        dump($dft->format($dd));
+        */
+        $contributor_citation = '';
+        $contributors = new ArrayCollection();
+        foreach ($this->contributors as $contributor) {
+            $contributors->add($contributor['last_name'] . ' ' . $contributor['first_name']);
+            $contributorFormatter = new MessageFormatter('fr_FR', "{0} {1} ");
+            $contributor_citation .= $contributorFormatter
+                ->format(["<a href='#'>".$contributor['last_name'],
+                    $contributor['first_name']."</a>"
+                ]);
+        }
+        $doi_title_language = new MessageFormatter("fr_FR","$contributor_citation.{0}.{1}.{2}.{3}");
+        if($format=='html')
+            return $doi_title_language->format(["<a href='#'>".$this->getDoi()."</a>",$this->getTitle(),$this->getLanguage(),$this->genre]);
+        else
+            return $doi_title_language->format([$this->getDoi(),$this->getTitle(),$this->getLanguage(),$this->genre]);
+
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getModifiedAt(): ?\DateTimeInterface
+    {
+        return $this->modifiedAt;
+    }
+
+    public function setModifiedAt(?\DateTimeInterface $modifiedAt): self
+    {
+        $this->modifiedAt = $modifiedAt;
 
         return $this;
     }

@@ -32,7 +32,7 @@
 
                                     {% for decision in form.decisionsNT %}
                                         <tr>
-                                            <td class="text-center"><a>{{ decision.vars.value.document.citation }}</a></td>
+                                            <td class="text-center"><a href="{{ path('document_index', {'id': decision.vars.value.document.id}) }}">{{ decision.vars.value.document.citation }}</a></td>
                                             <td class="text-center">{{ decision.vars.value.content }}</td>
                                             <td class="text-center">
                                                     {{ form_widget(decision,{'attr':{'data-id':'dec-'~form.vars.value.id~'-'~decision.vars.value.document.id~'-'~decision.vars.value.contributor.id}}) }}

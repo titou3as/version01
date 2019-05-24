@@ -25,14 +25,14 @@
                              {% if(decisions | length > 0)  %}
                                 {{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
                             <table class="table">
-                                <th class="text-center">DOI</th>
+                                <th class="text-center">Citation</th>
                                 <th class="text-center">Etat de dépôt</th>
                                 <th class="text-center">Décision à prendre</th>
                                 <tbody>
 
                                     {% for decision in form.decisionsNT %}
                                         <tr>
-                                            <td class="text-center">{{ decision.vars.value.document.doi }}</td>
+                                            <td class="text-center"><a>{{ decision.vars.value.document.citation }}</a></td>
                                             <td class="text-center">{{ decision.vars.value.content }}</td>
                                             <td class="text-center">
                                                     {{ form_widget(decision,{'attr':{'data-id':'dec-'~form.vars.value.id~'-'~decision.vars.value.document.id~'-'~decision.vars.value.contributor.id}}) }}

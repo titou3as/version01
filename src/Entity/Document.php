@@ -6,7 +6,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Polyfill\Intl\MessageFormatter\MessageFormatter;
-
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DocumentRepository")
  */
@@ -57,6 +56,11 @@ class Document
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $modifiedAt;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $language;
 
     public function __construct()
     {
@@ -179,40 +183,6 @@ class Document
 
         return $this;
     }
-    /**
-     * @param string $format
-     * @return string
-     */
-    public function citation($format= null)
-    {
-        /*
-        $dd= new \DateTime();
-
-        $dft = new IntlDateFormatter('en',
-            IntlDateFormatter::FULL,
-            0,
-            null,
-            null,
-            'dd/MM/yyyy h:m:s');
-        dump($dft->format($dd));
-        */
-        $contributor_citation = '';
-        $contributors = new ArrayCollection();
-        foreach ($this->contributors as $contributor) {
-            $contributors->add($contributor['last_name'] . ' ' . $contributor['first_name']);
-            $contributorFormatter = new MessageFormatter('fr_FR', "{0} {1} ");
-            $contributor_citation .= $contributorFormatter
-                ->format(["<a href='#'>".$contributor['last_name'],
-                    $contributor['first_name']."</a>"
-                ]);
-        }
-        $doi_title_language = new MessageFormatter("fr_FR","$contributor_citation.{0}.{1}.{2}.{3}");
-        if($format=='html')
-            return $doi_title_language->format(["<a href='#'>".$this->getDoi()."</a>",$this->getTitle(),$this->getLanguage(),$this->genre]);
-        else
-            return $doi_title_language->format([$this->getDoi(),$this->getTitle(),$this->getLanguage(),$this->genre]);
-
-    }
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
@@ -236,5 +206,51 @@ class Document
         $this->modifiedAt = $modifiedAt;
 
         return $this;
+    }
+
+    public function getLanguage(): ?string
+    {
+        return $this->language;
+    }
+
+    public function setLanguage(string $language): self
+    {
+        $this->language = $language;
+
+        return $this;
+    }
+    /**
+     * @param string $format
+     * @return string
+     */
+    public function citation($format= null)
+    {
+        /*
+        $dd= new \DateTime();
+
+        $dft = new IntlDateFormatter('en',
+            IntlDateFormatter::FULL,
+            0,
+            null,
+            null,
+            'dd/MM/yyyy h:m:s');
+        dump($dft->format($dd));
+        */
+        $contributor_citation = '';
+        $contributors = new ArrayCollection();
+        foreach ($this->contributors as $contributor) {
+            $contributors->add($contributor->getLastname() . ' ' . $contributor->getFirstname());
+            $contributorFormatter = new MessageFormatter('fr_FR', "{0} {1} ");
+            $contributor_citation .= $contributorFormatter
+                ->format([$contributor->getLastname(),
+                    "  ".$contributor->getFirstname()
+                ]);
+        }
+        $doi_title_language = new MessageFormatter("fr_FR","$contributor_citation.{0}.{1}.{2}.{3}");
+        if($format=='html')
+            return $doi_title_language->format(["<a href='#'>".$this->getDoi()."</a>",$this->getTitle(),$this->getLanguage(),$this->genre]);
+        else
+            return $doi_title_language->format([$this->getDoi(),$this->getTitle(),$this->getLanguage(),$this->genre]);
+
     }
 }
